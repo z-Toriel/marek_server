@@ -87,6 +87,9 @@ public class FansController extends BaseController {
 
     @PostMapping("/repass")
     public R repass(@RequestBody Fans fans){
+        if (fans.getPassword().equals("")){
+            return R.error(ResultCode.DATA_IS_WRONG,"请输入密码");
+        }
         fans.setPassword(MD5Utils.md5(MD5Utils.inputTokenPass(fans.getPassword())));    //将用户密码加密
         fansService.updateById(fans);
         return R.ok();
@@ -109,7 +112,7 @@ public class FansController extends BaseController {
             return R.ok().data("checkCode",this.checkCode);
         } catch (EmailException e) {
             e.printStackTrace();
-            return R.error(ResultCode.EMAIL_ERROR,"验证码获取失败");
+            return R.error(ResultCode.EMAIL_ERROR,"验证码发送失败，请输入正确邮箱");
         }
     }
 }
