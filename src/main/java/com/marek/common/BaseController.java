@@ -1,6 +1,8 @@
 package com.marek.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.marek.service.BooksEvaluateService;
+import com.marek.service.CategoryService;
 import com.marek.service.FansService;
 import com.marek.service.FilmService;
 import com.marek.utils.JwtUtils;
@@ -22,6 +24,12 @@ public class BaseController {
 
     @Autowired
     public FilmService filmService;
+
+    @Autowired
+    public CategoryService categoryService;
+
+    @Autowired
+    public BooksEvaluateService booksEvaluateService;
 
     //获得分页数据  前端请求传递参数current size  得到参数 封装为一个page对象（MP分页使用）。
     public Page getPage(){

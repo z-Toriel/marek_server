@@ -106,7 +106,7 @@ public class FansController extends BaseController {
             email.addTo(userEmail); //设置收件人
             email.setFrom("zhu1661908854@163.com","zbw"); // 设置发件人
             email.setAuthentication("zhu1661908854@163.com","VMEIGEOUDLLWJFVG");
-            email.setSubject("欢迎注册marek图书馆用户");
+            email.setSubject("欢迎使用marek图书馆用户");
             email.setMsg("这是你的验证码："+this.checkCode);
             email.send(); //发送
             return R.ok().data("checkCode",this.checkCode);

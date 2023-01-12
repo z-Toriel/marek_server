@@ -24,5 +24,8 @@ public class Category extends BaseEntity {
     @TableField("name")
     private String name;
 
+    @TableField("location")
+    private String location;
+
 
 }

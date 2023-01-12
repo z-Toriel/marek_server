@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author Byterain
@@ -32,8 +32,14 @@ public class Books extends BaseEntity {
     @TableField("category_id")
     private Long categoryId;
 
+    @TableField(exist = false)
+    private String categoryName;
+
     @TableField("region")
     private String region;
+
+    @TableField("remain")
+    private Integer remain;
 
     @TableField("cover")
     private String cover;
@@ -52,6 +58,15 @@ public class Books extends BaseEntity {
 
     @TableField("is_delete")
     private Integer isDelete;
+
+    @TableField("introduce")
+    private String introduce;
+
+    // 位置
+    @TableField(exist = false)
+    private String location;
+
+
 
 
 }
