@@ -31,6 +31,9 @@ public class BaseController {
     @Autowired
     public BooksService booksService;
 
+    @Autowired
+    public PosterService posterService;
+
     //获得分页数据  前端请求传递参数current size  得到参数 封装为一个page对象（MP分页使用）。
     public Page getPage(){
         int current = ServletRequestUtils.getIntParameter(request, "current", 1);//得到分页数据的当前页码
