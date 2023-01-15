@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.marek.common.BaseController;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -51,6 +53,17 @@ public class BooksController extends BaseController {
             return R.error(ResultCode.DATA_NOT_FOUND,"电影信息数据不存在");
         }else {
             return R.ok().data("book",book);
+        }
+    }
+
+    // 根据书籍分类获取对应的书籍列表
+    @GetMapping("/listByCategory/{categoryId}")
+    public R listByCategory(@PathVariable Long categoryId){
+        List<Books> bookListByCategory = booksService.list(new QueryWrapper<Books>().eq("category_id", categoryId));
+        if (bookListByCategory.size()>0){
+            return R.ok().data("list",bookListByCategory);
+        }else {
+            return R.error(ResultCode.DATA_NOT_FOUND,"数据未找到");
         }
     }
 
