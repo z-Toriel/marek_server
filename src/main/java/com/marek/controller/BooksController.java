@@ -26,8 +26,7 @@ import com.marek.common.BaseController;
 @CrossOrigin
 @RequestMapping("/books")
 public class BooksController extends BaseController {
-    @Autowired
-    BooksService booksService;
+
 
     @GetMapping("list")
     public R list(String name){

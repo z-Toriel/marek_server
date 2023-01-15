@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.marek.common.BaseController;
 import com.marek.common.R;
 import com.marek.common.ResultCode;
+import com.marek.entity.Books;
 import com.marek.entity.Category;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,11 @@ public class CategoryController extends BaseController {
     @GetMapping("/list")
     public R list() {
         List<Category> list= categoryService.list();
+        list.forEach(item ->{
+            Long categoryId = item.getId();
+            int categoryBooksNumber = booksService.count(new QueryWrapper<Books>().eq("category_id", categoryId));
+            item.setBooksNumber(categoryBooksNumber);
+        });
         if (list == null){
             return R.error(ResultCode.DATA_NOT_FOUND,"分类信息数据不存在");
         }else {

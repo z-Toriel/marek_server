@@ -27,5 +27,8 @@ public class Category extends BaseEntity {
     @TableField("location")
     private String location;
 
+    @TableField(exist = false)
+    private Integer booksNumber;
+
 
 }
