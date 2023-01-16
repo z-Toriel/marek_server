@@ -67,4 +67,15 @@ public class BooksController extends BaseController {
         }
     }
 
+    // 根据作者查找对应的书籍信息
+    @GetMapping("/listByauthor")
+    public R listByauthor(String authorName){
+        List<Books> booksListByAuthor = booksService.list(new QueryWrapper<Books>().like(!authorName.equals(""), "author", authorName));
+        if (booksListByAuthor.size()>0){
+            return R.ok().data("list",booksListByAuthor);
+        }else {
+            return R.error(ResultCode.DATA_NOT_FOUND,"数据未找到");
+        }
+    }
+
 }
