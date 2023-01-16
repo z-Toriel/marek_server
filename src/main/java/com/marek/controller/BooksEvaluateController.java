@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.marek.common.R;
 import com.marek.common.ResultCode;
 import com.marek.entity.BooksEvaluate;
+import com.marek.entity.Borrow;
 import com.marek.entity.Fans;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,6 +54,7 @@ public class BooksEvaluateController extends BaseController {
         booksEvaluate.setBid(bid);
         booksEvaluate.setComment(comment);
         booksEvaluate.setStar(star);
+        booksEvaluate.setStatu(1);
         booksEvaluate.setCreated(LocalDateTime.now());
         booksEvaluate.setUpdated(LocalDateTime.now());
         boolean b = booksEvaluateService.save(booksEvaluate);
@@ -61,6 +63,16 @@ public class BooksEvaluateController extends BaseController {
             return R.ok();
         }else {
             return R.error(ResultCode.DATA_NOT_FOUND,"没有数据");
+        }
+    }
+
+    @GetMapping("/num/{uid}")
+    public R num(@PathVariable Long uid){
+        Integer count = booksEvaluateService.count(new QueryWrapper<BooksEvaluate>().eq("uid", uid));
+        if (count != null){
+            return R.ok().data("booksEvaluateNum",count);
+        }else {
+            return R.error(ResultCode.DATA_NOT_FOUND,"数据未找到");
         }
     }
 
