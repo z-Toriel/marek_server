@@ -4,6 +4,7 @@ package com.marek.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.marek.common.R;
 import com.marek.common.ResultCode;
+import com.marek.entity.Books;
 import com.marek.entity.BooksEvaluate;
 import com.marek.entity.Borrow;
 import com.marek.entity.Fans;
@@ -73,6 +74,40 @@ public class BooksEvaluateController extends BaseController {
             return R.ok().data("booksEvaluateNum",count);
         }else {
             return R.error(ResultCode.DATA_NOT_FOUND,"数据未找到");
+        }
+    }
+
+    // 获取登录用户的所有评论
+    @GetMapping("/list/{uid}")
+    public R list(@PathVariable Long uid){
+        List<BooksEvaluate> booksEvaluateList = booksEvaluateService.list(new QueryWrapper<BooksEvaluate>().eq("uid", uid));
+        if (booksEvaluateList!=null){
+            booksEvaluateList.forEach(item->{
+                Fans fans = fansService.getById(uid);
+                String username = fans.getUsername();
+                item.setUsername(username);
+
+                Long bid = item.getBid();
+                Books book = booksService.getById(bid);
+                String bookName = book.getName();
+                String cover = book.getCover();
+                item.setCover(cover);
+                item.setBookName(bookName);
+            });
+            return R.ok().data("booksEvaluateList",booksEvaluateList);
+        }else {
+            return R.error(ResultCode.DATA_NOT_FOUND,"数据未找到");
+        }
+    }
+
+    // 删除评论
+    @PostMapping("/delEvaluate/{id}")
+    public R delEvaluate(@PathVariable Long id){
+        boolean b = booksEvaluateService.removeById(id);
+        if (b){
+            return R.ok();
+        }else{
+            return R.error(ResultCode.DATA_NOT_FOUND,"未能删除");
         }
     }
 

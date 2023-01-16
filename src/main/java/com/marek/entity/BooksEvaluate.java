@@ -41,6 +41,12 @@ public class BooksEvaluate extends BaseEntity {
     @TableField(exist = false)
     private String avatar;
 
+    @TableField(exist = false)
+    private String cover;
+
+    @TableField(exist = false)
+    private String bookName;
+
 
 
 }

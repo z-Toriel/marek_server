@@ -61,4 +61,17 @@ public class Borrow extends BaseEntity {
     private Integer compensation;
 
 
+    // 书名
+    @TableField(exist = false)
+    private String bookName;
+
+    // 作者
+    @TableField(exist = false)
+    private String author;
+
+    // 图书封面
+    @TableField(exist = false)
+    private String cover;
+
+
 }

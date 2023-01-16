@@ -1,6 +1,7 @@
 package com.marek.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.marek.common.BaseController;
 import com.marek.common.R;
 import com.marek.common.ResultCode;
@@ -56,6 +57,8 @@ public class FansController extends BaseController {
         fans.setStatu(1);
         fans.setCreated(LocalDateTime.now());
         fans.setUpdated(LocalDateTime.now());
+        fans.setSex(1);
+        fans.setDeltag(1);
         fans.setAvatar("http://markfang1.oss-cn-hangzhou.aliyuncs.com/2022/12/09/ae75c6ddb60c4dd9906b0ac8b46976104.jpg");
         fansService.save(fans); // 存入数据库
         return R.ok().data("fans", fans);
@@ -114,5 +117,19 @@ public class FansController extends BaseController {
             e.printStackTrace();
             return R.error(ResultCode.EMAIL_ERROR,"验证码发送失败，请输入正确邮箱");
         }
+    }
+
+    //更新用户
+    @PostMapping("/update")
+    public R update(@RequestBody Fans fans){
+        //更新用户的更新时间
+        fans.setUpdated(LocalDateTime.now());
+        boolean b = fansService.update(fans, new QueryWrapper<Fans>().eq("id", fans.getId()));
+        if (b){
+            return R.ok();
+        }else {
+            return R.error(ResultCode.DATA_IS_WRONG,"修改失败");
+        }
+
     }
 }

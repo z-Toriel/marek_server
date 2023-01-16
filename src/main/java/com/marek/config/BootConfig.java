@@ -13,7 +13,7 @@ public class BootConfig implements WebMvcConfigurer {
         //需要拦截的路径
         .addPathPatterns("/**")
         // 不需要拦截的路径
-        .excludePathPatterns("/fans/login","/","/fans/register","/fans/**")
+        .excludePathPatterns("/fans/login","/","/fans/register","/fans/**","/upload/**")
         ;
     }
 }
