@@ -59,6 +59,7 @@ public class FansController extends BaseController {
         fans.setUpdated(LocalDateTime.now());
         fans.setSex(1);
         fans.setDeltag(1);
+        fans.setRemainBorrowNumber(3);  // 设置默认借阅数量
         fans.setAvatar("http://markfang1.oss-cn-hangzhou.aliyuncs.com/2022/12/09/ae75c6ddb60c4dd9906b0ac8b46976104.jpg");
         fansService.save(fans); // 存入数据库
         return R.ok().data("fans", fans);

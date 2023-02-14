@@ -45,6 +45,9 @@ public class Fans extends BaseEntity {
     @TableField("delTag")
     private Integer deltag;
 
+    @TableField("remainBorrowNumber")
+    private Integer remainBorrowNumber;
+
     @TableField(exist = false)
     private String token;
 
