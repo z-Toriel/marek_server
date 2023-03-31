@@ -108,7 +108,7 @@ public class FansController extends BaseController {
         email.setCharset("utf-8");  // 设置发送的字符类型
         try {
             email.addTo(userEmail); //设置收件人
-            email.setFrom("zhu1661908854@163.com","zbw"); // 设置发件人
+            email.setFrom("zhu1661908854@163.com","Marek图书馆"); // 设置发件人
             email.setAuthentication("zhu1661908854@163.com","VMEIGEOUDLLWJFVG");
             email.setSubject("欢迎使用marek图书馆用户");
             email.setMsg("这是你的验证码："+this.checkCode);
